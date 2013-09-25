@@ -6,7 +6,7 @@
     <session-factory name="sessionFactory">
         <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
         <property name="hibernate.connection.password">pwd</property>
-        <property name="hibernate.connection.url">jdbc:derby://localhost:1527/sample;create=true</property>
+        <property name="hibernate.connection.url">jdbc:derby://localhost:1527/sample;create=false</property>
         <property name="hibernate.connection.username">user</property>
         <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
     </session-factory>
