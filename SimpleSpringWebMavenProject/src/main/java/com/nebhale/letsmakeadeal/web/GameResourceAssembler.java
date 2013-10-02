@@ -31,7 +31,7 @@ final class GameResourceAssembler extends ResourceAssemblerSupport<Game, GameRes
     }
 
     public GameResource toResource(Game game) {
-        GameResource resource = createResource(game);
+        GameResource resource = createResourceWithId(game.getId(), game);
         resource.status = game.getStatus();
         resource.add(linkTo(GamesController.class).slash(game).slash("doors").withRel("doors"));
         return resource;
