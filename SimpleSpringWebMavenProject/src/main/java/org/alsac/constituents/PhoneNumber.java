@@ -1,4 +1,4 @@
-package org.alsac.web;
+package org.alsac.constituents;
 
 import org.springframework.hateoas.ResourceSupport;
 

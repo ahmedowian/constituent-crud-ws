@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.alsac.constituents.ConstituentType;
 import org.alsac.constituents.EmailAddress;
-import org.alsac.web.PhoneNumber;
 import org.springframework.hateoas.Identifiable;
 
 public class Constituent  implements Identifiable<Long> {
