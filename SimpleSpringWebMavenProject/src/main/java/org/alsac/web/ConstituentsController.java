@@ -1,5 +1,7 @@
 package org.alsac.web;
 
+import org.alsac.constituents.Constituent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/constituents")
 public class ConstituentsController {
 	
-
+	@Autowired
+	ConstituentResourceAssembler constituentResourceAssembler;
+	
     public static void main(String[] args) {
         SpringApplication.run(ConstituentsController.class, args);
     }
@@ -26,7 +30,8 @@ public class ConstituentsController {
     @RequestMapping(method = RequestMethod.GET, value = "/{constituentId}", 
     		produces = { MediaType.APPLICATION_JSON_VALUE })
     ResponseEntity<ConstituentResource> getConstituent(@PathVariable Long constituentId) {
-    	ConstituentResource resource = new ConstituentResource();
+    	Constituent constituent = new Constituent();
+		ConstituentResource resource = constituentResourceAssembler.toResource(constituent );
     	
     	return new ResponseEntity<ConstituentResource>(resource, HttpStatus.OK);
     }
