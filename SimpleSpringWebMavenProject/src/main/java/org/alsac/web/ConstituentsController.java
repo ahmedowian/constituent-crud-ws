@@ -1,6 +1,9 @@
 package org.alsac.web;
 
-import org.alsac.constituents.Constituent;
+import org.alsac.constituents.*;
+
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConstituentsController {
 	
 	@Autowired
-	ConstituentResourceAssembler constituentResourceAssembler;
+	private ConstituentResourceAssembler constituentResourceAssembler;
+	
+	@Autowired
+	private TransactionsAssembler transactionsAssembler;
 	
     public static void main(String[] args) {
         SpringApplication.run(ConstituentsController.class, args);
@@ -31,10 +37,23 @@ public class ConstituentsController {
     		produces = { MediaType.APPLICATION_JSON_VALUE })
     ResponseEntity<ConstituentResource> getConstituent(@PathVariable Long constituentId) {
     	Constituent constituent = new Constituent();
+    	constituent.setId(constituentId);
 		ConstituentResource resource = constituentResourceAssembler.toResource(constituent );
     	
     	return new ResponseEntity<ConstituentResource>(resource, HttpStatus.OK);
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/{constituentId}/transactions/", 
+    		produces = { MediaType.APPLICATION_JSON_VALUE })
+    ResponseEntity<TransactionsResource> getConstituentTransactions(@PathVariable Long constituentId) {
+    	Constituent constituent = new Constituent();
+    	constituent.setId(constituentId);
+    	
+		TransactionsResource resource = transactionsAssembler.toResource(constituent );
+    	
+    	return new ResponseEntity<TransactionsResource>(resource, HttpStatus.OK);
+    }
+    	
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{constituentId}", 
